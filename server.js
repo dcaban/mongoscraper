@@ -6,7 +6,6 @@ var mongoose = require("mongoose");
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
-var axios = require("axios");
 var request = require("request");
 var cheerio = require("cheerio");  
 
@@ -27,7 +26,7 @@ var app = express();
 // Set Handlebars as the default templating engine.
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
+app.use("/", require("./routes/htmlRoutes/appRoutes.js"));
 
 // Configure middleware
 
@@ -48,22 +47,24 @@ mongoose.connect("mongodb://localhost/week18Populater", {
 // Routes
 
 app.get("/scrape", function(req, res) {
-  // Make a request for the news section of ycombinator
+
+  // Make a request for the news section of npr tech stories
   request("https://www.npr.org/sections/alltechconsidered/", function(error, response, html) {
     
       // Load the HTML into cheerio and save it to a variable
       // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
       var $ = cheerio.load(html);
-    
+   
       // With cheerio, find each p-tag with the "title" class
       // (i: iterator. element: the current element)
-      $("div.item-info").each(function(i, element) {
+      $("article.has-image").each(function(i, element) {
     
         // Save the text of the element in a "title" variable
-      var title = $(element).children("h2.title").text();
-      var link = $(element).children("p.teaser").children("a").attr("href");
-      var summary = $(element).children("p.teaser").text();      
-      
+      var title = $(element).children("div.item-info").children("h2.title").text();
+      var link = $(element).children("div.item-info").children("p.teaser").children("a").attr("href");
+      var summary = $(element).children("div.item-info").children("p.teaser").text();
+      var image = $(element).children("div.item-image").children("div.imagewrap").children("a").children("img").attr("src");
+    
 
       // If this found element had both a title and a link
       if (title && link) {
@@ -71,24 +72,27 @@ app.get("/scrape", function(req, res) {
         db.Article.create({
           title: title,
           link: link,
-          summary: summary
+          summary: summary,
+          image: image
         },
         function(err, inserted) {
-          if (err) {
-            // Log the error if one is encountered during the query
-            console.log(err);
-          }
-          else {
-            // Otherwise, log the inserted data
-            console.log(inserted);
-          }
+          console.log('ERROR:', err);
         });
+
+
       }
     });
+db.Article.find({}).then(function(Articles){
+
+    // Send a "Scrape Complete" message to the browser
+  res.json({
+    count: Articles.length,
+    articles: Articles
+  });
+});
   });
 
-  // Send a "Scrape Complete" message to the browser
-  res.send("Scrape Complete");
+  
 });
 
 // Route for getting all Articles from the db
@@ -143,7 +147,6 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
-
 // Start the server
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
