@@ -1,19 +1,5 @@
-// Grab the articles as a json
-$(document).on("click", ".scrape", function() {
-  event.preventDefault();
-  console.log("working"); 
-});
-$.getJSON("/articles", function(data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<div class='card'><div class='card-image'><figure class='image is-3x1'><img class='imgsize' src='"
-    + data[i].image + "' alt='Placeholder image'></figure></div><div class='card-content'><p class='title' data-id='" 
-    + data[i]._id + "'>" 
-    + data[i].title + "</p><hr><p class='subtitle'>" + data[i].summary + 
-    "</p></div>")
-  }
-});
+
+
 
 
 // Whenever someone clicks a p tag

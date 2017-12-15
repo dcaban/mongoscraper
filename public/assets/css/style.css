@@ -26,7 +26,7 @@ height: 100vh;
   display: inline-block;
   overflow: auto;
   height: 100vh;
-  padding: 30px;
+  padding: 15px;
   padding-bottom:0px;
 }
 .notes-cover {
@@ -62,19 +62,39 @@ textarea {
   height: 20vh;
 }
 
-.scrape{
+.navButton{
+  min-width: 200px!important;
   border-style: solid;
   border-width: 1px;
   padding: 10px;
   border-radius: 2px;
   border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0);
+  margin-bottom: 10px;
+}
+.navButton:hover{
+  box-shadow: 3px 3px 3px  rgba(0, 0, 0, 0.201);
+}
+.buttonLink{
   color: white;
 }
-.scrape:hover{
-  box-shadow: 3px 3px 3px  rgba(0, 0, 0, 0.201);
+.buttonLink:hover{
   color:whitesmoke;
 }
 
+.saveButton{
+  margin:auto;
+  width: 80%;
+  border-top: 1px solid #4351e4;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0);
+  color: #4351e7;
+  border-radius: 0px 0px 10px 10px;
+}
+.saveButton:hover{
+  text-shadow: 0.5px 0.5px #4351e763;
+}
 .left{
   background-color: #E74351;
 }
@@ -87,7 +107,10 @@ h1{
 }
 
 .card{
-  margin-bottom: 15px;
+  margin-top:0px;
+  overflow: hidden;
+  margin:15px;
+  max-width: 800px!important;
 }
 
 #titleinput{
@@ -100,7 +123,27 @@ h1{
 }
 
 .imgsize{
-  height: 180px!important;
+  position: relative;
+  top: 10px;
+  z-index: 2;
+  height: 175px!important;
   width: auto !important;
   margin:auto;
+  border-radius: 2px;
+  box-shadow: 0px 18px 50px 0px rgba(48, 48, 48, 0.9);
+}
+
+.imgbackground {
+  min-width: 110%;
+  max-height: 220px;
+  display: block;
+  position: absolute;
+  top: -10px;
+  background-image: url(https://media.npr.org/assets/img/2017/12/05/louie2_wide-175a0fd652013c0af8a6a50f589b71edfcb8f29c-s300-c15.jpg);
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  filter: blur(6px);
+}
+.card-title{
+  margin-top: 28px;
 }

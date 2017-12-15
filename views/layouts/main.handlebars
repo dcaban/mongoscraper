@@ -16,6 +16,52 @@
 
 <body>
 
+  <div class="columns">
+
+
+    <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <!-- Any other Bulma elements you want -->
+        <div class='card'>
+          <div class='card-content'>
+            <p id="newArticles" class='title has-text-centered'>
+
+            </p>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+
+    <div class="column is-half">
+      <section class="hero left is-fullheight">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              TECH SCRAPER
+            </h1>
+            <h2 class="subtitle">
+              From NPR All Tech Considered
+            </h2>
+            <button class="navButton">
+              <a id="scrape" class="buttonLink" href="/scrape">
+                SCRAPE ARTICLES
+              </a>
+            </button>
+            <br>
+            <button class="navButton">
+              <a id="savedArticles" class="buttonLink" href="/saved">
+                SAVED ARTICLES
+              </a>
+            </button>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
 	{{{ body }}}
 </body>
 

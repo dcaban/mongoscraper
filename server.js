@@ -14,6 +14,9 @@ var db = require("./models");
 
 var PORT = 3000;
 
+var helpers = require('handlebars-helpers')();
+
+
 var exphbs = require("express-handlebars");
 
 // Initialize Express
@@ -94,6 +97,36 @@ db.Article.find({}).then(function(Articles){
 
   
 });
+
+
+app.get("/", function(req, res) {
+  db.Article
+  .find({}).sort({_id:-1})
+  .then(function(dbArticle) {
+    // If we were able to successfully find Articles, send them back to the client
+    // res.json(dbArticle);
+    res.render("index", { Article: dbArticle });
+  })
+  .catch(function(err) {
+    // If an error occurred, send it to the client
+    res.json("stupid error");
+  });
+});
+
+app.get("/saved", function(req, res) {
+  db.Article
+  .find({})
+  .then(function(dbArticle) {
+    // If we were able to successfully find Articles, send them back to the client
+    // res.json(dbArticle);
+    res.render("saved", { Article: dbArticle });
+  })
+  .catch(function(err) {
+    // If an error occurred, send it to the client
+    res.json("stupid error");
+  });
+});
+
 
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
