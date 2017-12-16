@@ -24,7 +24,7 @@ var app = express();
 
 
 
-
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/week18Populator";
 
 // Set Handlebars as the default templating engine.
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
@@ -43,7 +43,7 @@ app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/week18Populater", {
+mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
 
