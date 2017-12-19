@@ -3,7 +3,8 @@
 
 
 // Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+$(document).on("click", ".noteButton", function() {
+  
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag
@@ -20,11 +21,11 @@ $(document).on("click", "p", function() {
       // The title of the article
   
       $("#notes").addClass("notes-cover has-text-centered");
-      $("#notes").append("<h2 class='note-headline'>" + data.title + "</h2>");
+      $("#notes").append("<h1 class='note-headline'>" + "Add New Note" + "</h1>");
       // An input to enter a new title
-      $("#notes").append("<input id='titleinput' name='title' >");
+      $("#notes").append("<h1>Add Note Title</h1><input id='titleinput' name='title' >");
       // A textarea to add a new note body
-      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+      $("#notes").append("<h1>New Note Note</h1><textarea id='bodyinput' name='body'></textarea>");
       // A button to submit a new note, with the id of the article saved to it
       $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
       $(".notes-cover").show();
@@ -48,6 +49,7 @@ $(document).on("click", "#savenote", function() {
     method: "POST",
     url: "/articles/" + thisId,
     data: {
+
       // Value taken from title input
       title: $("#titleinput").val(),
       // Value taken from note textarea

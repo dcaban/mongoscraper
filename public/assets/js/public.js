@@ -53,5 +53,24 @@
         console.log("working");
         var blue = $(this).attr("value"); 
         console.log(blue); 
-
-    });
+// When you click the save article button
+    // Grab the id associated with the article from the submit button
+    var thisId = $(this).attr("value");
+  
+    // Run a POST request to change the note, using what's entered in the inputs
+    $.ajax({
+      method: "POST",
+      url: "/save/" + thisId,
+      data: {
+        // Value taken from title input
+        saved: true
+      }
+    })
+      // With that done
+      .done(function(data) {
+        // Log the response
+        console.log(data);
+      
+      });
+  });
+   
