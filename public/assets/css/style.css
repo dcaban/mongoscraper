@@ -82,6 +82,11 @@ textarea {
   color:whitesmoke;
 }
 
+.delete{
+  position: absolute;
+  top: 0px;
+}
+
 .saveButton{
   margin:auto;
   width: 80%;
@@ -146,4 +151,8 @@ h1{
 }
 .card-title{
   margin-top: 28px;
+}
+
+.removed{
+  display: none;
 }

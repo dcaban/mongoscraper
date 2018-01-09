@@ -73,4 +73,30 @@
       
       });
   });
+
+    $(document).on("click", ".remove" , function() {
+        console.log("remove almost working");
+        var blue = $(this).attr("value");
+        console.log(blue);
+// When you click the save article button
+        // Grab the id associated with the article from the submit button
+        var thisId = $(this).attr("value");
+        $("."+thisId+"").addClass("removed");
+
+        // Run a POST request to change the note, using what's entered in the inputs
+        $.ajax({
+            method: "POST",
+            url: "/remove/" + thisId,
+            data: {
+                // Value taken from title input
+                saved: false
+            }
+        })
+        // With that done
+            .done(function(data) {
+                // Log the response
+                console.log("hello",data);
+
+            });
+    });
    
